@@ -15,7 +15,7 @@ namespace Bank.Account
 		/// This should be a negative number when different from zero
 		/// </summary>
 		decimal OverdraftLimit { get; set; }
-		decimal Balance { get; }
+		decimal Balance { get; set;}
 		Task DepositAsync(decimal amount);
 		Task WithdrawAsync(decimal amount);
 	}

@@ -22,7 +22,7 @@ namespace Bank
 	{
 		public IAccount GetAccount(AccountType type, int accountNumber)
 		{
-			throw new NotImplementedException();
+			return new Bank.Account.Account();
 		}
 
 		public ITransactionAudit GetAudit()
