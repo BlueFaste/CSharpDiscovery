@@ -11,16 +11,19 @@ namespace Bank.Account
 		
 		public decimal OverdraftLimit { get; set; }
 		
-        public decimal Balance { get; } = 0;
+        public decimal Balance { get; private set; }
 		
         public async Task DepositAsync(decimal amount)
         {
 			if (amount < 0) throw new UnauthorizedAccountOperationException();
+
+            Balance += amount;
         }
 
 		public async Task WithdrawAsync(decimal amount)
         {
-            throw new NotImplementedException();
+            if ( OverdraftLimit > Balance - amount || amount < 0) throw new UnauthorizedAccountOperationException();
+            Balance -= amount;
         }
     }
 }
