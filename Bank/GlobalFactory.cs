@@ -22,7 +22,10 @@ namespace Bank
 	{
 		public IAccount GetAccount(AccountType type, int accountNumber)
 		{
-			return new Bank.Account.Account();
+			Console.WriteLine(type);
+			Console.WriteLine(AccountType.Current);
+			if( type == AccountType.Current) return new CurrentAccount(accountNumber);
+			else return new SavingAccount(accountNumber);
 		}
 
 		public ITransactionAudit GetAudit()
