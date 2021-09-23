@@ -4,7 +4,7 @@ using Bank.Exceptions;
 
 namespace Bank.Account
 {
-    public class Account : IAccount
+    public class AccountCurrent : IAccount
     {
         public int AccountNumber { get; } = 2;
 
