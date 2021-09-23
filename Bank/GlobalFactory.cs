@@ -20,12 +20,22 @@ namespace Bank
 	/// </remarks>
 	public class GlobalFactory : IGlobalFactory
 	{
+		private LockDownManager _lockDownManager;
+
 		public IAccount GetAccount(AccountType type, int accountNumber)
 		{
+			AccountBase account = null;
 			if(type == AccountType.Current)
-				return new CurrentAccount(accountNumber);
+				account = new CurrentAccount(accountNumber);
+			else
+				account = new SavingAccount(accountNumber);
 
-			return new SavingAccount(accountNumber);
+			var ldm = GetLockDownManager();
+
+			ldm.LockDownStarted += account.OnLockDownStarted;
+			ldm.LockDownEnded += account.OnLockDownEnded;
+
+			return account;
 		}
 
 		public ITransactionAudit GetAudit()
@@ -35,7 +45,12 @@ namespace Bank
 
 		public ILockDownManager GetLockDownManager()
 		{
-			throw new NotImplementedException();
+			if(_lockDownManager == null)
+			{
+				_lockDownManager = new LockDownManager();
+			}
+
+			return _lockDownManager;
 		}
 		public IDateService GetDateService()
 		{
