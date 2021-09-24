@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 
 using Bank.Exceptions;
+using Bank.Audit;
 using Bank.LockDown;
 
 namespace Bank.Account
@@ -27,6 +28,7 @@ namespace Bank.Account
 			if (amount < 0) throw new UnauthorizedAccountOperationException();
 
             Balance += amount;
+            
         }
 
 		public async Task WithdrawAsync(decimal amount)
@@ -35,6 +37,7 @@ namespace Bank.Account
             if(_isLocked) throw new UnauthorizedAccountOperationException();
             if (!VerifyWithdrawAmount(amount)) throw new UnauthorizedAccountOperationException();
             Balance -= amount;
+
         }
 
         public void OnLockDownStarted(object sender, EventArgs e)
