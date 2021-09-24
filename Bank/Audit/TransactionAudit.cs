@@ -21,7 +21,7 @@ namespace Bank.Audit
                     transactions.Add(trans);
             }
 
-            return transaction;
+            return transactions;
         }
 
 		/// <summary>
