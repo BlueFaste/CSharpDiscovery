@@ -7,14 +7,16 @@ namespace Bank.Audit
 {
     public class TransactionAudit : ITransactionAudit
     {
-        private readonly List<Transaction> _transactions = new List<Transaction>();
+        private readonly Dictionary<int, List<Transaction>> _transactions = new Dictionary<int, List<Transaction>>();
 
         /// <summary>
 		/// Gets a list of transactions for the specified account
 		/// </summary>
 		public async Task<IEnumerable<Transaction>> GetAccountTransactionsAsync(int accountNumber)
         {
-            return _transactions.Where(t => t.AccountNumber == accountNumber);
+            if(!_transactions.ContainsKey(accountNumber)) return Enumerable.Empty<Transaction>();
+
+            return _transactions[accountNumber];
         }
 
 		/// <summary>
@@ -22,7 +24,12 @@ namespace Bank.Audit
 		/// </summary>
 		public async Task WriteTransactionAsync(Transaction transaction)
         {
-            _transactions.Add(transaction);
+            if (!_transactions.ContainsKey(transaction.AccountNumber))
+            {
+                _transactions.Add(transaction.AccountNumber, new List<Transaction>());
+            }
+
+            _transactions[transaction.AccountNumber].Add(transaction);
         }
     }
 }
