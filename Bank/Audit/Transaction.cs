@@ -12,6 +12,8 @@ namespace Bank.Audit
 	{
 		public int Id { get; set; }
 
+		public int AccountNumber { get; set; }
+
 		public TransactionType TransactionType { get; set; }
 
 		public DateTimeOffset TransactionDate { get; set; }

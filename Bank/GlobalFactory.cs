@@ -21,6 +21,7 @@ namespace Bank
 	public class GlobalFactory : IGlobalFactory
 	{
 		private LockDownManager _lockDownManager;
+		private TransactionAudit _transactionAudit;
 
 		public IAccount GetAccount(AccountType type, int accountNumber)
 		{
@@ -40,7 +41,8 @@ namespace Bank
 
 		public ITransactionAudit GetAudit()
 		{
-			throw new NotImplementedException();
+			if(_transactionAudit == null) _transactionAudit = new TransactionAudit();
+			return _transactionAudit;
 		}
 
 		public ILockDownManager GetLockDownManager()
