@@ -1,13 +1,14 @@
 using System;
 using System.Threading.Tasks;
 
+using Bank.Audit;
 using Bank.Exceptions;
 
 namespace Bank.Account
 {
     public class SavingAccount : AccountBase
     {
-        public SavingAccount(int accountNumber) : base(accountNumber)
+        public SavingAccount(int accountNumber, ITransactionAudit transactionAudit) : base(accountNumber, transactionAudit)
         { }
 
         public override decimal OverdraftLimit 

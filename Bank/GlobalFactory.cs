@@ -27,9 +27,9 @@ namespace Bank
 		{
 			AccountBase account = null;
 			if(type == AccountType.Current)
-				account = new CurrentAccount(accountNumber);
+				account = new CurrentAccount(accountNumber, GetAudit());
 			else
-				account = new SavingAccount(accountNumber);
+				account = new SavingAccount(accountNumber, GetAudit());
 
 			var ldm = GetLockDownManager();
 

@@ -10,12 +10,21 @@ namespace Bank.Audit
 	/// </remarks>
 	public class Transaction
 	{
-		public int Id { get; set; }
+		private static int _currentId = 0;
+
+		public Transaction()
+		{
+			Id = _currentId++;
+		}
+
+		public int Id { get; private set; }
 
 		public int AccountNumber { get; set; }
 
 		public TransactionType TransactionType { get; set; }
 
 		public DateTimeOffset TransactionDate { get; set; }
+
+		public decimal Amount { get; set; }
 	}
 }
