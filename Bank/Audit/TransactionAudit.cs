@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace Bank.Audit
 {
@@ -13,15 +14,7 @@ namespace Bank.Audit
 		/// </summary>
 		public async Task<IEnumerable<Transaction>> GetAccountTransactionsAsync(int accountNumber)
         {
-            var transactions = new List<Transaction>();
-
-            foreach (var trans in _transactions)
-            {
-                if (trans.AccountNumber == accountNumber)
-                    transactions.Add(trans);
-            }
-
-            return transactions;
+            return _transactions.Where(t => t.AccountNumber == accountNumber);
         }
 
 		/// <summary>
