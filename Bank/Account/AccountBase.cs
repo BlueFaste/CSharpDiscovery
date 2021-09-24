@@ -11,6 +11,8 @@ namespace Bank.Account
     {
         private ILockDownManager _lockDownManager;
         private bool _isLocked = false;
+        private ITransactionAudit _audit;
+
         public int AccountNumber { get; } = 0;
 
         public AccountBase(int accountNumber)
